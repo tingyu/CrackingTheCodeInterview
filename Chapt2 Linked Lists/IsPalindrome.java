@@ -76,6 +76,38 @@ boolean isPalindrome(LinkedListNode head){
 	return true;
 }
 
+//my solution
+boolean isPalindrome(LinkedListNode head){
+	LinkedListNode fast = head;
+	LinkedListNode slow = head;
+
+	Stack<Intger> stack = new Stack<Intger>();
+	stack.push(slow.data);
+	//Push element from the first half of linked list onto stack. When faster runner (which is moving at 2x speed)
+	//reaches the end of the linked list, then we know we are at the middle
+	while(fast.next != null && fast.next.next != null){
+		slow = slow.next;
+		fast = fast.next.next;
+		stack.push(slow.data);
+	} 
+
+	//Has odd number of elements
+	if(fast.next ==null){
+		stack.pop();
+	}
+
+	while(slow.next !=null) {
+		slow = slow.next;
+		int top = stack.pop().intValue();
+
+		//if values are different, then it's not a palindrome
+		if(top != slow.data) {
+			return false;
+		}
+	}
+	return true;
+}
+
 /*
 Solution #3: Recursive Approach
 First, a word on notation: in the below solution, when we use the notation node Kx,
