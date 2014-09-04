@@ -6,7 +6,7 @@ How would you design a stack which, in addition to push and pop, also has a func
 
 /*
 The thing with minimums is that they don't change very often. They only change when a smaller element is added.
-Onesolutionisto havejustasingle int value,minValue,that'samember ofthe Stack class. 
+One solution is to have just asingle int value,minValue,that'samember ofthe Stack class. 
 When minValue is popped from the stack, we search through the stack to find the new minimum. 
 Unfortunately, this would break the constraint that push and pop operate in 0(1) time.
 To further understand this question, let's walk through it with a short example:
@@ -54,6 +54,11 @@ public class StackWithMin extends Stack<NodeWithMin>{
 There's just one issue with this: if we have a large stack, we waste a lot of space 
 by keeping track of the min for every single element. Can we do better?
 We can (maybe) do a bit better than this by using an additional stack which keeps track of the mins.
+
+关键是用两个stack，当前的stack extends stack.其中再用一个stack来记录最小的值。
+这里用另外一个stack来记录最小的值，比priorityQueue的解法要好。因为只需要在新push的value小于stack最上面的value的时候才push进去。
+很像priorityQueue。但是里面也是从小到大排序的，同时存储的值要少得多。
+pop的时候如果pop出来的那个值正好是最小的值，那么在s2中也需要pop出来。
 */
 
 public class StackWithMin2 extends stack<Integer>{
