@@ -83,3 +83,31 @@ public static int checkHeight(TreeNode root){
 }
 
 //This code runs in 0(N) time and 0(H) space, where H is the height of the tree.
+
+//可以简化下代码如下
+ public class Solution{
+ 	public boolean isBalanced(TreeNode root) {
+ 		if(root == null)
+ 			return true;
+ 		if(getHeight(root) == -1)
+ 			return false;
+ 		return true;
+ 	}
+
+ 	public int getHeight(TreeNode root){
+ 		if(root == null)
+ 			return 0;
+
+ 		int left = getHeight(root.left);
+ 		int right = getHeight(root.right);
+
+ 		if(left == -1 || right == -1)
+ 			return -1;
+
+ 		if(Math.abs(left - right) > 1){
+ 			return -1;
+ 		}
+
+ 		return Math.max(left, right) + 1;
+ 	}
+ }
