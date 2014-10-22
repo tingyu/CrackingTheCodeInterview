@@ -19,10 +19,10 @@ public enum State{
 public static boolean search(Graph g, Node start, Node end){
 	if(start == end) return true;
 
-	//operate as Queue
-	LinkedList<Node> q = new LinkedList<Node>();
+	//operates as Queue
+	LinkedLIst<Node> q = new LinkedList<Node>();
 
-	for(Node u: g.getNodes()){
+	for(Node u : g.getNodes()){
 		u.state = State.Unvisited;
 	}
 
@@ -30,7 +30,7 @@ public static boolean search(Graph g, Node start, Node end){
 	q.add(start);
 	Node u;
 	while(!q.isEmpty()){
-		u = q.removeFirs(); //i.e. dequeue
+		u = q.removeFirst(); //i.e., dequeue()
 		if(u != null){
 			for(Node v : u.getAdjacent()){
 				if(v.state == State.Unvisited){
@@ -42,12 +42,11 @@ public static boolean search(Graph g, Node start, Node end){
 					}
 				}
 			}
+			u.state = State.Visited;
 		}
-		u.state = State.Visited;
 	}
 	return false;
 }
-
 /*
 It may be worth discussing with your interviewer the trade-offs between breadth first search 
 and depth first search for this and other problems. For example, depth first search is a bit 
